@@ -1,0 +1,38 @@
+# Phase 1 Topology
+
+Rendered version: [`topology-diagram.png`](topology-diagram.png).
+
+## ASCII (quick reference)
+
+```
+                          SAME PRIVATE LAN (10.7.0.0/19, gw 10.7.0.1)
+   ┌─────────────────────────────────────────────────────────────────────┐
+   │                                                                     │
+   │   Mac A (Krishna)        Mac B (Aaloke)         Mac C (Arina)        Mac D (Hemanth)
+   │   DNS — dnsmasq          nginx — HTTPS :8443     Backend A :3001     Backend B :3002
+   │   10.7.5.108             10.7.20.225             10.7.13.142         10.7.20.219
+   │        │                      │                       │                   │
+   │        │  DNS (UDP 53)        │                       │                   │
+   │        └─────────────────────►│                       │                   │
+   │                               │──── proxy_pass :3001 ─►│                  │
+   │                               └──── proxy_pass :3002 ─────────────────────►│
+   │                                                                     │
+   └─────────────────────────────────────────────────────────────────────┘
+```
+
+## Mermaid source
+
+```mermaid
+graph TD
+    Client[Client Mac<br/>e.g. Mac C or D]
+    A[Mac A — Krishna<br/>DNS: dnsmasq<br/>10.7.5.108<br/>UDP:53]
+    B[Mac B — Aaloke<br/>Edge: nginx<br/>10.7.20.225<br/>TCP:8443 TLS]
+    C[Mac C — Arina<br/>Backend A<br/>10.7.13.142<br/>TCP:3001]
+    D[Mac D — Hemanth<br/>Backend B<br/>10.7.20.219<br/>TCP:3002]
+
+    Client -- "1. DNS query app.team1.test" --> A
+    A -- "2. A record = 10.7.20.225" --> Client
+    Client -- "3. HTTPS request :8443" --> B
+    B -- "4a. round-robin proxy_pass" --> C
+    B -- "4b. round-robin proxy_pass" --> D
+```

@@ -1,0 +1,23 @@
+Phase 1 — LAN / Role / IP Table
+================================
+
+Subnet:  10.7.0.0/19  (mask 255.255.224.0)
+Gateway: 10.7.0.1
+
+| Mac | Owner   | Role                          | IP            | Interface | Wi-Fi MAC (Client ID)   |
+|-----|---------|-------------------------------|---------------|-----------|-------------------------|
+| A   | Krishna | DNS server (dnsmasq)          | 10.7.5.108    | en0       | 80:a9:97:4b:38:44       |
+| B   | Aaloke  | Edge / nginx / TLS / LB       | 10.7.20.225   | en0       | 10:9f:41:bc:14:cc       |
+| C   | Arina   | Backend A (HTTP :3001)        | 10.7.13.142   | en0       | 10:9f:41:c1:4b:75       |
+| D   | Hemanth | Backend B (HTTP :3002)        | 10.7.20.219   | en0       | 10:9f:41:c4:2d:e3       |
+
+DNS records (served by Mac A):
+  app.team1.test  -> 10.7.20.225  (Mac B)
+  api.team1.test  -> 10.7.20.225  (Mac B)
+
+Public entry point:
+  https://app.team1.test:8443/api/status
+
+nginx upstream (round-robin):
+  server 10.7.13.142:3001;   # Backend A (Mac C)
+  server 10.7.20.219:3002;   # Backend B (Mac D)

@@ -1,0 +1,35 @@
+Phase 1 — TLS Notes
+===================
+
+CA / cert tool: mkcert
+Cert subject:   app.team1.test
+Cert location:  /Users/aalokeeppalapalli/documents/education/nst/cn/
+                  app.team1.test.pem       (certificate)
+                  app.team1.test-key.pem   (private key)
+TLS termination: Mac B (Aaloke), nginx, port 8443
+
+Generation (run on Mac B):
+    mkcert -install
+    cd /Users/aalokeeppalapalli/documents/education/nst/cn
+    mkcert app.team1.test
+
+Distributing trust to client Macs (C and D at minimum):
+    On Mac B:
+        mkcert -CAROOT
+        # copy rootCA.pem from that directory to Mac C and Mac D
+
+    On Mac C / Mac D:
+        sudo security add-trusted-cert -d -r trustRoot ~/rootCA.pem
+
+Verification (must NOT use curl -k):
+    curl -i https://app.team1.test:8443/api/status
+
+Handshake to identify in Wireshark (filter: tls):
+    ClientHello
+    ServerHello
+    Certificate
+    (Key Exchange)
+    Finished
+
+    After Finished, all HTTP request/response data is encrypted —
+    show this contrast against the earlier plaintext DNS query.
