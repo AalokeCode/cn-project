@@ -1,6 +1,6 @@
 # Task A: Mac 4 IP, mask, gateway, interface, MAC
 # Machine: Mac 4 (Backend B + backup DNS + client) (MacBook-Pro-M3), en0 = 10.7.2.47
-# Time:    2026-11-23 18:55:19 IST
+# Time:    2026-11-23 19:04:04 IST
 
 $ networksetup -getinfo 'Wi-Fi'; echo; echo 'en0 MAC (on the wire):'; ifconfig en0 | grep ether
 DHCP Configuration

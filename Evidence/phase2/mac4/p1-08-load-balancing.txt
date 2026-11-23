@@ -1,0 +1,13 @@
+# Task D: repeated requests by name are spread across Backend A and Backend B
+# Machine: Mac 4 (Backend B + backup DNS + client) (MacBook-Pro-M3), en0 = 10.7.2.47
+# Time:    2026-11-23 19:04:11 IST
+
+$ for i in 1 2 3 4 5 6 7 8; do curl --cacert '/Users/hemanth10etii/cn-project/tls/rootCA.pem' -sI https://app.team1.test/api/status | grep -i '^x-backend'; done
+x-backend: B
+x-backend: A
+x-backend: B
+x-backend: A
+x-backend: B
+x-backend: A
+x-backend: B
+x-backend: A
