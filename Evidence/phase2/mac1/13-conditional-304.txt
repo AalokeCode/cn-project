@@ -1,0 +1,10 @@
+# Task F: conditional request -> 304 Not Modified from issuing backend
+# Krishnas-MacBook-Pro-7.local (10.7.5.108)  2026-11-23 19:06:05
+$ for n in 1 2; do H=$(curl --cacert ~/cn-project/tls/rootCA.pem -sI https://app.team1.test/api/status | tr -d '\r'); ET=$(echo "$H" | awk 'tolower($1)=="etag:"{print $2}'); echo "first: $(echo "$H" | grep -i x-backend) etag $ET"; for k in 1 2; do curl --cacert ~/cn-project/tls/rootCA.pem -si -H "If-None-Match: $ET" https://app.team1.test/api/status | grep -iE '^(HTTP|x-backend|etag)' | tr -d '\r' | paste -sd' ' -; done; echo; done
+first: x-backend: B etag "3b7d18aba8a10926"
+HTTP/2 200  x-backend: A etag: "d208bfa2f0ed4859"
+HTTP/2 304  etag: "3b7d18aba8a10926" x-backend: B
+
+first: x-backend: A etag "d208bfa2f0ed4859"
+HTTP/2 200  x-backend: B etag: "3b7d18aba8a10926"
+HTTP/2 304  etag: "d208bfa2f0ed4859" x-backend: A

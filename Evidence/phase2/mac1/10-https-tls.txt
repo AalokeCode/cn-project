@@ -1,0 +1,12 @@
+# Task E: HTTPS by name, cert verified by team CA (no -k), TLS 1.3, HTTP/2
+# Krishnas-MacBook-Pro-7.local (10.7.5.108)  2026-11-23 19:06:02
+$ curl --cacert ~/cn-project/tls/rootCA.pem -v -o /dev/null https://app.team1.test/api/status 2>&1 | grep -E 'Connected to|SSL connection|ALPN|subject:|issuer:|subjectAltName|SSL certificate verify|HTTP/2 200'
+* Connected to app.team1.test (10.7.22.206) port 443
+* ALPN: curl offers h2,http/1.1
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384 / X25519 / RSASSA-PSS
+* ALPN: server accepted h2
+*  subject: O=mkcert development certificate; OU=root@Aalokes-MacBook-Pro.local (System Administrator)
+*  subjectAltName: host "app.team1.test" matched cert's "app.team1.test"
+*  issuer: O=mkcert development CA; OU=aalokeeppalapalli@Aalokes-MacBook-Pro.local (Aaloke Eppalapalli); CN=mkcert aalokeeppalapalli@Aalokes-MacBook-Pro.local (Aaloke Eppalapalli)
+*  SSL certificate verify ok.
+< HTTP/2 200
