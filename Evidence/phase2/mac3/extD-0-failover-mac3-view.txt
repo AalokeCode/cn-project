@@ -1,0 +1,41 @@
+# Ext D: HA failover seen from Mac 3 - round robin, Backend A stopped (all B, no errors), Backend A restarted (balancing resumes)
+# Machine: Mac 3 (Backend A + standby edge) (Arinas-MacBook-Pro), en0 = 10.7.17.193
+# Time:    2026-11-23 18:50:57 IST (captured before the team kit was pulled; Backend A was started/stopped with a helper script instead of Ctrl+C)
+
+$ for i in 1 2 3 4 5 6; do curl -s -m 5 -o /dev/null -D - --resolve app.team1.test:443:10.7.22.206 https://app.team1.test/api/status | grep -iE '^HTTP|x-backend' | tr -d '\r' | paste -sd' ' -; done
+HTTP/2 200  x-backend: B
+HTTP/2 200  x-backend: A
+HTTP/2 200  x-backend: B
+HTTP/2 200  x-backend: A
+HTTP/2 200  x-backend: B
+HTTP/2 200  x-backend: A
+
+$ ./scripts/backend-a.sh stop
+Backend A stopped at 18:50:57
+nothing listening on :3001
+
+$ for i in 1 2 3 4 5 6; do curl -s -m 5 -o /dev/null -D - --resolve app.team1.test:443:10.7.22.206 https://app.team1.test/api/status | grep -iE '^HTTP|x-backend' | tr -d '\r' | paste -sd' ' -; done
+HTTP/2 200  x-backend: B
+HTTP/2 200  x-backend: B
+HTTP/2 200  x-backend: B
+HTTP/2 200  x-backend: B
+HTTP/2 200  x-backend: B
+HTTP/2 200  x-backend: B
+
+$ ./scripts/backend-a.sh start
+Backend A started (pid 8957), listening:
+
+# (11 s later, after nginx's fail_timeout)
+$ for i in 1 2 3 4 5 6; do curl -s -m 5 -o /dev/null -D - --resolve app.team1.test:443:10.7.22.206 https://app.team1.test/api/status | grep -iE '^HTTP|x-backend' | tr -d '\r' | paste -sd' ' -; done
+HTTP/2 200  x-backend: B
+HTTP/2 200  x-backend: B
+HTTP/2 200  x-backend: A
+HTTP/2 200  x-backend: B
+HTTP/2 200  x-backend: A
+HTTP/2 200  x-backend: B
+
+
+$ ./scripts/backend-a.sh status
+Backend A running (pid 8957)
+COMMAND  PID        USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+Python  8957 arinaali_26    3u  IPv4 0x4e34bec018242990      0t0  TCP *:3001 (LISTEN)
