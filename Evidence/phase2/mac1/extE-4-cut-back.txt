@@ -1,0 +1,7 @@
+# Ext E: cut back to the main edge (DNS -> 10.7.22.206)
+# Krishnas-MacBook-Pro-7.local (10.7.5.108)  2026-11-23 19:34:30
+$ dig @10.7.5.108 app.team1.test +short; dig @10.7.2.47 app.team1.test +short; curl --cacert ~/cn-project/tls/rootCA.pem -sI https://app.team1.test/api/status | grep -iE '^(HTTP|x-edge)'
+10.7.22.206
+10.7.22.206
+HTTP/2 200 
+x-edge: mac2
