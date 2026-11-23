@@ -1,0 +1,12 @@
+# Task B: api.team1.test resolves to Mac 2
+# Krishnas-MacBook-Pro-7.local (10.7.5.108)  2026-11-23 18:52:44
+$ dig @10.7.5.108 api.team1.test +noall +answer +stats
+
+; <<>> DiG 9.10.6 <<>> @10.7.5.108 api.team1.test +noall +answer +stats
+; (1 server found)
+;; global options: +cmd
+api.team1.test.         30      IN      A       10.7.22.206
+;; Query time: 2 msec
+;; SERVER: 10.7.5.108#53(10.7.5.108)
+;; WHEN: Mon Nov 23 18:52:44 IST 2026
+;; MSG SIZE  rcvd: 59

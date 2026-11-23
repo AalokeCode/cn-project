@@ -1,0 +1,6 @@
+# Task B: dnsmasq running on Mac 1
+# Krishnas-MacBook-Pro-7.local (10.7.5.108)  2026-11-23 18:52:44
+$ pgrep -lf dnsmasq; echo; dig @10.7.5.108 app.team1.test +short
+64746 /opt/homebrew/sbin/dnsmasq -C /opt/homebrew/etc/dnsmasq.conf
+
+10.7.22.206

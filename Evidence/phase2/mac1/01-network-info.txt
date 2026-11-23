@@ -1,0 +1,15 @@
+# Task A: Mac 1 IP, mask, gateway, interface, MAC
+# Krishnas-MacBook-Pro-7.local (10.7.5.108)  2026-11-23 18:52:18
+$ networksetup -getinfo Wi-Fi; echo; ifconfig en0 | grep -E 'ether|inet '
+DHCP Configuration
+IP address: 10.7.5.108
+Subnet mask: 255.255.224.0
+Router: 10.7.0.1
+Client ID: 
+IPv6: Automatic
+IPv6 IP address: none
+IPv6 Router: none
+Wi-Fi ID: 80:a9:97:4b:38:44
+
+	ether 02:00:00:00:00:00
+	inet 10.7.5.108 netmask 0xffffe000 broadcast 10.7.31.255
