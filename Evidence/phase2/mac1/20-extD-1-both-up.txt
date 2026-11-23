@@ -1,9 +1,0 @@
-# Ext D: both backends up -> A and B alternate
-# Krishnas-MacBook-Pro-7.local (10.7.5.108)  2026-11-23 19:15:52
-$ for i in 1 2 3 4 5 6; do curl --cacert ~/cn-project/tls/rootCA.pem -s -o /dev/null -D - https://app.team1.test/api/status | grep -iE '^(HTTP|x-backend)' | tr -d '\r' | paste -sd' ' -; done
-HTTP/2 200  x-backend: B
-HTTP/2 200  x-backend: A
-HTTP/2 200  x-backend: B
-HTTP/2 200  x-backend: A
-HTTP/2 200  x-backend: B
-HTTP/2 200  x-backend: A
