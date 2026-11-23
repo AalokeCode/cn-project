@@ -1,0 +1,11 @@
+# Task D: repeated requests through the edge alternate between Backend A and Backend B (round-robin)
+# Machine: Mac 2 (edge nginx) (Aalokes-MacBook-Pro), en0 = 10.7.22.206
+# Time:    2026-11-23 18:54:35 IST
+
+$ for i in 1 2 3 4 5 6; do curl --cacert "$CA" --resolve app.team1.test:443:127.0.0.1 -s -o /dev/null -D - https://app.team1.test/api/status | grep -i -E '^(x-backend|x-edge)' | tr -d '\r' | paste -sd' ' -; done
+x-backend: A x-edge: mac2
+x-backend: B x-edge: mac2
+x-backend: A x-edge: mac2
+x-backend: B x-edge: mac2
+x-backend: A x-edge: mac2
+x-backend: B x-edge: mac2

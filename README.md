@@ -67,9 +67,28 @@ Full status of what's captured and what's not: [`Evidence/README.md`](Evidence/R
 | Deliverable | Status |
 |---|---|
 | Architecture document (topology, IP table, request flow) | Done, all three now have rendered diagram images |
-| Configuration bundle (dnsmasq, nginx, TLS, launch instructions) | Done for Phase 1, Phase 2 additions come later |
+| Configuration bundle (dnsmasq, nginx, TLS, launch instructions) | Done for Phase 1. Phase 2 configs in [`Configuration/phase2/`](Configuration/phase2/) |
 | Backend source code | Done. Zipped at [`_submission/Backend-Source-Code.zip`](_submission/Backend-Source-Code.zip) |
 | Evidence folder | Done except TCP and TLS Wireshark handshake captures, confirmed unrecoverable, see `Evidence/README.md` |
 | Phase 1 checkpoint (live system) | Not yet, the topology needs to be rebuilt before the actual review |
 | Phase 2 final report | Not started, not due until Phase 2 |
 | Final presentation | Not started, not due until final evaluation |
+
+## Phase 2 (Team 1)
+
+IPs changed after Phase 1 (DHCP). Current values live in [`scripts/team.env`](scripts/team.env):
+
+| Mac | Owner   | Role                                   | IP           |
+|-----|---------|----------------------------------------|--------------|
+| 1   | Krishna | Primary DNS (dnsmasq) + test client    | 10.7.5.108   |
+| 2   | Aaloke  | Edge nginx: TLS :443, HTTP/2, LB       | 10.7.22.206  |
+| 3   | Arina   | Backend A :3001 + standby edge (Ext E) | 10.7.17.193  |
+| 4   | Hemanth | Backend B :3002 + backup DNS (Ext A)   | 10.7.2.47    |
+
+Entry point: `https://app.team1.test/api/status` (port 443, HTTP/2).
+
+- Configs: [`Configuration/phase2/`](Configuration/phase2/) (nginx with failover, primary/backup dnsmasq, pf isolation rules)
+- Backends: [`Backends/`](Backends/) now send `ETag`, answer `304` and `HEAD`
+- Scripts + run sheet: [`scripts/README.md`](scripts/README.md); Ext F practice: [`scripts/troubleshooting-runbook.md`](scripts/troubleshooting-runbook.md)
+- Team CA (public cert only): [`tls/rootCA.pem`](tls/rootCA.pem). Never commit `*-key.pem`.
+- Evidence: [`Evidence/phase2/mac1/`](Evidence/phase2/mac1/README.md) (DNS), [`Evidence/phase2/mac2/`](Evidence/phase2/mac2/README.md) (edge)
