@@ -1,0 +1,8 @@
+# Rules loaded: only the edge 10.7.22.206 may connect to port 3002, all others get a TCP reset
+# Machine: Mac 4 (Backend B + backup DNS + client) (MacBook-Pro-M3), en0 = 10.7.2.47
+# Time:    2026-11-23 18:56:11 IST
+
+$ sudo pfctl -s info 2>/dev/null | head -1; sudo pfctl -sr 2>/dev/null | grep -E 'port = 3002'
+Status: Enabled for 0 days 00:00:00           Debug: Urgent
+pass in quick inet proto tcp from 10.7.22.206 to any port = 3002 flags S/SA keep state
+block return in quick proto tcp from any to any port = 3002

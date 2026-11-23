@@ -1,0 +1,13 @@
+# Same answer from primary (Mac 1) and backup (Mac 4)
+# Machine: Mac 4 (Backend B + backup DNS + client) (MacBook-Pro-M3), en0 = 10.7.2.47
+# Time:    2026-11-23 19:04:13 IST
+
+$ for s in 10.7.5.108 10.7.2.47; do echo "server $s:"; dig @$s app.team1.test +noall +answer +stats | grep -E 'IN[[:space:]]+A|SERVER|Query time'; done
+server 10.7.5.108:
+app.team1.test.		30	IN	A	10.7.22.206
+;; Query time: 23 msec
+;; SERVER: 10.7.5.108#53(10.7.5.108)
+server 10.7.2.47:
+app.team1.test.		30	IN	A	10.7.22.206
+;; Query time: 1 msec
+;; SERVER: 10.7.2.47#53(10.7.2.47)

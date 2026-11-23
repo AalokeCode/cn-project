@@ -6,7 +6,7 @@
 
 source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
 ME="Mac 3 (Backend A + standby edge)"
-EVID_DIR="$REPO/Evidences/phase2/mac3"
+EVID_DIR="$REPO/Evidence/phase2/mac3"
 SECTIONS=(phase1 extC extE)
 PORT=3001
 PF_RULES="$PHASE2/pf-isolation-mac3.conf"

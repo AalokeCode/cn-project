@@ -1,0 +1,9 @@
+# Task B / Ext A: Mac 4 lists primary (Mac 1) then backup (Mac 4) DNS
+# Machine: Mac 4 (Backend B + backup DNS + client) (MacBook-Pro-M3), en0 = 10.7.2.47
+# Time:    2026-11-23 19:04:10 IST
+
+$ networksetup -getdnsservers 'Wi-Fi'; scutil --dns | grep nameserver | sort -u
+10.7.5.108
+10.7.2.47
+  nameserver[0] : 10.7.5.108
+  nameserver[1] : 10.7.2.47

@@ -1,0 +1,8 @@
+# Task D: nginx listens on TCP 443
+# Machine: Mac 2 (edge nginx) (Aalokes-MacBook-Pro), en0 = 10.7.22.206
+# Time:    2026-11-23 18:54:22 IST
+
+$ sudo lsof -nP -iTCP:443 -sTCP:LISTEN
+COMMAND   PID   USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+nginx   62722   root    6u  IPv4 0xf351e999c94f3e4c      0t0  TCP *:443 (LISTEN)
+nginx   62723 nobody    6u  IPv4 0xf351e999c94f3e4c      0t0  TCP *:443 (LISTEN)

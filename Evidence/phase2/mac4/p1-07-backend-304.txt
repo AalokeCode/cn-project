@@ -1,0 +1,13 @@
+# Task F: Backend B conditional request (ETag -> 304 Not Modified)
+# Machine: Mac 4 (Backend B + backup DNS + client) (MacBook-Pro-M3), en0 = 10.7.2.47
+# Time:    2026-11-23 19:04:13 IST
+
+$ E=$(curl -sI http://10.7.2.47:3002/api/status | awk 'tolower($1)=="etag:"{print $2}' | tr -d '\r'); echo "ETag = $E"; curl -s -i -H "If-None-Match: $E" http://10.7.2.47:3002/api/status
+ETag = "3b7d18aba8a10926"
+HTTP/1.0 304 Not Modified
+Server: BaseHTTP Python/3.15.0
+Date: Mon, 23 Nov 2026 13:34:13 GMT
+ETag: "3b7d18aba8a10926"
+X-Backend: B
+Cache-Control: max-age=60
+

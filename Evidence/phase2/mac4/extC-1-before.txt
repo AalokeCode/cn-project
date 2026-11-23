@@ -1,0 +1,6 @@
+# Before: pf status (rollback copy of /etc/pf.conf saved as extC-0-rollback-copy-of-etc-pf.conf)
+# Machine: Mac 4 (Backend B + backup DNS + client) (MacBook-Pro-M3), en0 = 10.7.2.47
+# Time:    2026-11-23 18:56:11 IST
+
+$ sudo pfctl -s info 2>/dev/null | head -1
+Status: Disabled                              Debug: Urgent
