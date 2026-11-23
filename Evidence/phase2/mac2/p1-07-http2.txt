@@ -1,0 +1,6 @@
+# HTTP/2 negotiated through ALPN
+# Machine: Mac 2 (edge nginx) (Aalokes-MacBook-Pro), en0 = 10.7.22.206
+# Time:    2026-11-23 18:54:22 IST
+
+$ curl --cacert '/Users/aalokeeppalapalli/Library/Application Support/mkcert/rootCA.pem' --resolve app.team1.test:443:127.0.0.1 -sI --http2 https://app.team1.test/ | head -1
+HTTP/2 200 

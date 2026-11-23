@@ -1,0 +1,11 @@
+# Task A: Mac 2 pings Mac 1, 3, 4
+# Machine: Mac 2 (edge nginx) (Aalokes-MacBook-Pro), en0 = 10.7.22.206
+# Time:    2026-11-23 18:54:16 IST
+
+$ for ip in 10.7.5.108 10.7.17.193 10.7.2.47; do ping -c 3 $ip | tail -2; done
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 13.405/17.414/25.214/5.516 ms
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 14.809/16.068/17.557/1.134 ms
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 11.716/30.466/63.576/23.481 ms
