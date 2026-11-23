@@ -11,8 +11,9 @@ TMP=$(mktemp -d)
 for txt in "$DIR"/*.txt; do
   [[ -e $txt ]] || { echo "no .txt files in $DIR"; exit 1; }
   name=$(basename "$txt" .txt)
-  lines=$(wc -l < "$txt")
-  height=$(( lines * 19 + 90 ))
+  # count wrapped rows too: ~125 characters fit on one 1100px line
+  lines=$(awk '{ n += (length($0) > 125) ? int((length($0) + 124) / 125) : 1 } END { print n + 1 }' "$txt")
+  height=$(( lines * 19 + 90 + 120 ))  # headless Chrome loses ~100px of the window to browser UI
   (( height < 240 )) && height=240
   python3 - "$txt" "$TMP/$name.html" "$name" <<'PY'
 import html, sys
