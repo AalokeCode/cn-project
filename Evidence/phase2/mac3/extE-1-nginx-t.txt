@@ -1,0 +1,7 @@
+# Standby edge: same config as Mac 2 (only X-Edge differs)
+# Machine: Mac 3 (Backend A + standby edge) (Arinas-MacBook-Pro), en0 = 10.7.17.193
+# Time:    2026-11-23 19:27:24 IST
+
+$ sudo nginx -t
+nginx: the configuration file /opt/homebrew/etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /opt/homebrew/etc/nginx/nginx.conf test is successful

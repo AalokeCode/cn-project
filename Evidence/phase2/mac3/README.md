@@ -11,9 +11,13 @@ Each item has a `.txt` with the real command output (machine, IP, timestamp, com
 | p1-04-dig | Task B | `dig app.team1.test` → 10.7.22.206 (Mac 2), TTL 30, answered by 10.7.5.108 |
 | p1-05-backend | Task C, F | Backend A listening on `*:3001`, `/` and `/api/status` both answer with `X-Backend: A`, `Cache-Control: max-age=60` and `ETag` |
 | extD-0-failover-mac3-view | Ext D | Seen from Mac 3 through the edge: A/B round robin → Backend A stopped, all 6 requests served by B with no errors → A restarted, balancing resumes after nginx's `fail_timeout`. Captured before the kit was pulled, so it uses a small start/stop helper instead of Ctrl+C, and `--resolve` instead of the team DNS. Mac 1's `extD` is the official capture. |
+| extE-1-nginx-t | Ext E | Standby edge on Mac 3: the same `nginx-phase2.conf` as Mac 2 (only `X-Edge` differs) passes `nginx -t` |
+| extE-2-standby-works | Ext E | Standby edge serves the app before any DNS change: `HTTP/2 200`, `x-edge: mac3`, verified with `--cacert` against the team CA |
 
-## Still pending (run with the team, per `scripts/README.md`)
-- `extC`: apply the pf rules, wait for Mac 1 and Mac 2 to test, roll back.
-- `extE`: standby edge on this Mac. Needs `brew install nginx` and both certificate files from Mac 2's `/opt/homebrew/etc/nginx/certs/`.
 
-The scripts write to `Evidences/phase2/mac3/`; move the new `.txt` files here and rerun `evidence-to-png.sh`.
+## Skipped
+- `extC` (pf isolation): not evaluated this round, so it was not run.
+
+## Notes
+- Ext E run: standby started 19:27, kept up while Mac 1 and Mac 4 did the DNS cutover, stopped on mac2's go at about 19:33. The script then restored the original `nginx.conf`, and port 443 on Mac 3 was confirmed closed.
+- Ext D run: Backend A stopped with Ctrl+C on mac2's cue at 19:23:05 and restarted at about 19:23:50 (Mac 1's `extD` files are the capture).
