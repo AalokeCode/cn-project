@@ -1,0 +1,6 @@
+# Task B: other names forwarded upstream
+# Krishnas-MacBook-Pro-7.local (10.7.5.108)  2026-11-23 18:52:44
+$ dig @10.7.5.108 example.com +noall +answer +stats | grep -E 'IN|SERVER'
+example.com.            116     IN      A       172.66.147.243
+example.com.            116     IN      A       104.20.23.154
+;; SERVER: 10.7.5.108#53(10.7.5.108)
