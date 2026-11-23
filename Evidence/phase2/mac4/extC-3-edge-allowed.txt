@@ -1,0 +1,14 @@
+# Edge still reaches Backend B: pf rule counters and live states from 10.7.22.206 to :3002
+# Machine: Mac 4 (Backend B + backup DNS + client) (MacBook-Pro-M3), en0 = 10.7.2.47
+# Time:    2026-11-23 18:56:12 IST
+
+$ sudo pfctl -vsr 2>/dev/null | grep -A2 -E 'port = 3002' | grep -E 'port|Packets'; echo; echo 'pf states for port 3002:'; sudo pfctl -ss 2>/dev/null | grep ':3002' | head -6
+pass in quick inet proto tcp from 10.7.22.206 to any port = 3002 flags S/SA keep state
+  [ Evaluations: 411       Packets: 30        Bytes: 2838        States: 3     ]
+block return in quick proto tcp from any to any port = 3002
+  [ Evaluations: 102       Packets: 0         Bytes: 0           States: 0     ]
+
+pf states for port 3002:
+ALL tcp 10.7.2.47:3002 <- 10.7.22.206:60546       FIN_WAIT_2:FIN_WAIT_2
+ALL tcp 10.7.2.47:3002 <- 10.7.22.206:60548       FIN_WAIT_2:FIN_WAIT_2
+ALL tcp 10.7.2.47:3002 <- 10.7.22.206:60550       FIN_WAIT_2:FIN_WAIT_2
