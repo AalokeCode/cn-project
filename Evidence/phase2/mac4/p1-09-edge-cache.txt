@@ -1,0 +1,19 @@
+# Task F: Cache-Control + ETag through the edge, conditional request to the same backend gives 304
+# Machine: Mac 4 (Backend B + backup DNS + client) (MacBook-Pro-M3), en0 = 10.7.2.47
+# Time:    2026-11-23 19:04:12 IST
+
+$ H=$(curl --cacert '/Users/hemanth10etii/cn-project/tls/rootCA.pem' -sI https://app.team1.test/api/status); echo "$H" | grep -i -E '^(HTTP|x-backend|cache-control|etag)'; E=$(echo "$H" | awk 'tolower($1)=="etag:"{print $2}' | tr -d '\r'); echo; echo "If-None-Match: $E  (sent twice: round-robin alternates, each backend has its own ETag)"; for i in 1 2; do curl --cacert '/Users/hemanth10etii/cn-project/tls/rootCA.pem' -sI -H "If-None-Match: $E" https://app.team1.test/api/status | grep -i -E '^(HTTP|x-backend|etag)'; echo; done
+HTTP/2 200 
+x-backend: B
+etag: "3b7d18aba8a10926"
+cache-control: max-age=60
+
+If-None-Match: "3b7d18aba8a10926"  (sent twice: round-robin alternates, each backend has its own ETag)
+HTTP/2 200 
+x-backend: A
+etag: "d208bfa2f0ed4859"
+
+HTTP/2 304 
+etag: "3b7d18aba8a10926"
+x-backend: B
+

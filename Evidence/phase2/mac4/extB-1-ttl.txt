@@ -1,0 +1,14 @@
+# Project record carries the 30 s TTL (local-ttl=30); second query shows the countdown
+# Machine: Mac 4 (Backend B + backup DNS + client) (MacBook-Pro-M3), en0 = 10.7.2.47
+# Time:    2026-11-23 19:04:13 IST
+
+$ dig @10.7.2.47 app.team1.test +noall +answer; sleep 5; dig app.team1.test +noall +answer
+
+; <<>> DiG 9.10.6 <<>> @10.7.2.47 app.team1.test +noall +answer
+; (1 server found)
+;; global options: +cmd
+app.team1.test.		30	IN	A	10.7.22.206
+
+; <<>> DiG 9.10.6 <<>> app.team1.test +noall +answer
+;; global options: +cmd
+app.team1.test.		30	IN	A	10.7.22.206
