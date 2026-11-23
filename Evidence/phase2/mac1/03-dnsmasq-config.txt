@@ -1,0 +1,13 @@
+# Task B / Ext B: dnsmasq Phase 2 config (records -> Mac 2, local-ttl=30)
+# Krishnas-MacBook-Pro-7.local (10.7.5.108)  2026-11-23 18:52:25
+$ grep -v '^#' /opt/homebrew/etc/dnsmasq.conf | grep -v '^$'
+listen-address=10.7.5.108
+interface=en0
+bind-interfaces
+address=/app.team1.test/10.7.22.206
+address=/api.team1.test/10.7.22.206
+local-ttl=30
+no-resolv
+server=8.8.8.8
+server=1.1.1.1
+cache-size=1000

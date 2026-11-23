@@ -1,0 +1,23 @@
+# Task B: app.team1.test resolves to Mac 2 via team DNS
+# Krishnas-MacBook-Pro-7.local (10.7.5.108)  2026-11-23 18:52:44
+$ dig @10.7.5.108 app.team1.test
+
+; <<>> DiG 9.10.6 <<>> @10.7.5.108 app.team1.test
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 58609
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;app.team1.test.                        IN      A
+
+;; ANSWER SECTION:
+app.team1.test.         30      IN      A       10.7.22.206
+
+;; Query time: 3 msec
+;; SERVER: 10.7.5.108#53(10.7.5.108)
+;; WHEN: Mon Nov 23 18:52:44 IST 2026
+;; MSG SIZE  rcvd: 59

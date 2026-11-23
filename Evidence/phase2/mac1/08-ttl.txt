@@ -1,0 +1,7 @@
+# Ext B: record TTL is 30 s
+# Krishnas-MacBook-Pro-7.local (10.7.5.108)  2026-11-23 18:52:44
+$ dig app.team1.test +noall +answer
+
+; <<>> DiG 9.10.6 <<>> app.team1.test +noall +answer
+;; global options: +cmd
+app.team1.test.         30      IN      A       10.7.22.206
