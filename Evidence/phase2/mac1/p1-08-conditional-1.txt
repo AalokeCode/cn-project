@@ -1,0 +1,18 @@
+# Task F: conditional requests #1: 304 from the backend that issued the ETag, 200 from the other one
+# Machine: Mac 1 (primary DNS + client) (Krishnas-MacBook-Pro-7), en0 = 10.7.5.108
+# Time:    2026-11-23 19:16:40 IST
+
+$ H=$(curl --cacert '/Users/krishnadevan/cn-project/tls/rootCA.pem' -sI https://app.team1.test/api/status | tr -d '\r'); ET=$(echo "$H" | awk 'tolower($1)=="etag:"{print $2}'); echo "First request: $(echo "$H" | grep -i '^x-backend') -> ETag $ET"; for n in 1 2; do echo; echo "Conditional request $n (If-None-Match: $ET):"; curl --cacert '/Users/krishnadevan/cn-project/tls/rootCA.pem' -si -H "If-None-Match: $ET" https://app.team1.test/api/status | grep -i -E '^(HTTP|x-backend|etag|cache-control)' | tr -d '\r'; done
+First request: x-backend: B -> ETag "3b7d18aba8a10926"
+
+Conditional request 1 (If-None-Match: "3b7d18aba8a10926"):
+HTTP/2 200 
+x-backend: A
+etag: "d208bfa2f0ed4859"
+cache-control: max-age=60
+
+Conditional request 2 (If-None-Match: "3b7d18aba8a10926"):
+HTTP/2 304 
+etag: "3b7d18aba8a10926"
+x-backend: B
+cache-control: max-age=60

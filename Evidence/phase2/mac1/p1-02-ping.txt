@@ -1,0 +1,11 @@
+# Task A: Mac 1 pings Mac 2, 3, 4
+# Machine: Mac 1 (primary DNS + client) (Krishnas-MacBook-Pro-7), en0 = 10.7.5.108
+# Time:    2026-11-23 19:16:33 IST
+
+$ for ip in 10.7.22.206 10.7.17.193 10.7.2.47; do ping -c 3 $ip | tail -2; done
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 7.463/35.063/86.940/36.708 ms
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 7.946/36.717/93.419/40.096 ms
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 8.165/25.404/54.175/20.477 ms

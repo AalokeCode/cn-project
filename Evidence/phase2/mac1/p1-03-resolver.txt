@@ -1,0 +1,9 @@
+# Task B: Mac 1 uses the team DNS servers
+# Machine: Mac 1 (primary DNS + client) (Krishnas-MacBook-Pro-7), en0 = 10.7.5.108
+# Time:    2026-11-23 19:16:39 IST
+
+$ networksetup -getdnsservers 'Wi-Fi'; scutil --dns | grep nameserver | sort -u
+10.7.5.108
+10.7.2.47
+  nameserver[0] : 10.7.5.108
+  nameserver[1] : 10.7.2.47
