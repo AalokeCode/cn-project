@@ -1,0 +1,9 @@
+# Client switched to the new answer about 43 s after caching it (record TTL 30 s)
+# Machine: Mac 1 (primary DNS + client) (Krishnas-MacBook-Pro-7), en0 = 10.7.5.108
+# Time:    2026-11-23 19:39:51 IST
+
+$ echo "primary DNS (Mac 1): $(dig @10.7.5.108 app.team1.test +short)"; echo "backup  DNS (Mac 4): $(dig @10.7.2.47 app.team1.test +short)"; echo "client (dscacheutil): $(dscacheutil -q host -a name app.team1.test | awk '/ip_address/{print $2}')"; echo "client (ping):       $(ping -c 1 -t 1 app.team1.test 2>/dev/null | head -1 | sed 's/.*(\(.*\)).*/\1/')"
+primary DNS (Mac 1): 10.7.17.193
+backup  DNS (Mac 4): 10.7.17.193
+client (dscacheutil): 10.7.17.193
+client (ping):       10.7.17.193

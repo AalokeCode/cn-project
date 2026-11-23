@@ -1,0 +1,9 @@
+# Record TTL is now 30 s (was 0 in Phase 1)
+# Machine: Mac 1 (primary DNS + client) (Krishnas-MacBook-Pro-7), en0 = 10.7.5.108
+# Time:    2026-11-23 19:37:12 IST
+
+$ dig app.team1.test +noall +answer
+
+; <<>> DiG 9.10.6 <<>> app.team1.test +noall +answer
+;; global options: +cmd
+app.team1.test.		30	IN	A	10.7.22.206
