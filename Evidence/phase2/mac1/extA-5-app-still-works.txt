@@ -1,0 +1,7 @@
+# Primary down, the app still works by name
+# Machine: Mac 1 (primary DNS + client) (Krishnas-MacBook-Pro-7), en0 = 10.7.5.108
+# Time:    2026-11-23 19:16:50 IST
+
+$ curl --cacert '/Users/krishnadevan/cn-project/tls/rootCA.pem' -s -i https://app.team1.test/api/status | grep -i -E '^(HTTP|x-backend)'
+HTTP/2 200 
+x-backend: A

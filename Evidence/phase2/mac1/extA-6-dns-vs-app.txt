@@ -1,0 +1,7 @@
+# Contrast: wrong DNS server = name lookup fails although IP connectivity works
+# Machine: Mac 1 (primary DNS + client) (Krishnas-MacBook-Pro-7), en0 = 10.7.5.108
+# Time:    2026-11-23 19:16:50 IST
+
+$ dig @8.8.8.8 app.team1.test +short +time=2 | head -1; echo '(empty = NXDOMAIN)'; ping -c 2 10.7.22.206 | tail -1
+(empty = NXDOMAIN)
+round-trip min/avg/max/stddev = 7.348/8.355/9.363/1.008 ms

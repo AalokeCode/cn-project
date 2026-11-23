@@ -1,0 +1,6 @@
+# Primary is back
+# Machine: Mac 1 (primary DNS + client) (Krishnas-MacBook-Pro-7), en0 = 10.7.5.108
+# Time:    2026-11-23 19:16:52 IST
+
+$ dig @10.7.5.108 app.team1.test +short
+10.7.22.206

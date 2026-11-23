@@ -1,0 +1,5 @@
+# Ext A: wrong DNS server (8.8.8.8) -> name fails, IP still reachable
+# Krishnas-MacBook-Pro-7.local (10.7.5.108)  2026-11-23 19:06:07
+$ dig @8.8.8.8 app.team1.test +short +time=2; echo '(empty = NXDOMAIN)'; ping -c 2 10.7.22.206 | tail -1
+(empty = NXDOMAIN)
+round-trip min/avg/max/stddev = 12.407/36.214/60.021/23.807 ms

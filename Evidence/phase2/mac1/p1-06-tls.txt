@@ -1,0 +1,24 @@
+# Task E: certificate verified by our CA, TLS version, no -k
+# Machine: Mac 1 (primary DNS + client) (Krishnas-MacBook-Pro-7), en0 = 10.7.5.108
+# Time:    2026-11-23 19:16:40 IST
+
+$ curl --cacert '/Users/krishnadevan/cn-project/tls/rootCA.pem' -v -o /dev/null https://app.team1.test/ 2>&1 | grep -E 'Connected to|SSL connection|ALPN|subject:|issuer:|subjectAltName|verify|HTTP/'
+* Connected to app.team1.test (10.7.22.206) port 443
+* ALPN: curl offers h2,http/1.1
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384 / X25519 / RSASSA-PSS
+* ALPN: server accepted h2
+*  subject: O=mkcert development certificate; OU=root@Aalokes-MacBook-Pro.local (System Administrator)
+*  subjectAltName: host "app.team1.test" matched cert's "app.team1.test"
+*  issuer: O=mkcert development CA; OU=aalokeeppalapalli@Aalokes-MacBook-Pro.local (Aaloke Eppalapalli); CN=mkcert aalokeeppalapalli@Aalokes-MacBook-Pro.local (Aaloke Eppalapalli)
+*  SSL certificate verify ok.
+* using HTTP/2
+* [HTTP/2] [1] OPENED stream for https://app.team1.test/
+* [HTTP/2] [1] [:method: GET]
+* [HTTP/2] [1] [:scheme: https]
+* [HTTP/2] [1] [:authority: app.team1.test]
+* [HTTP/2] [1] [:path: /]
+* [HTTP/2] [1] [user-agent: curl/8.7.1]
+* [HTTP/2] [1] [accept: */*]
+> GET / HTTP/2
+< HTTP/2 200 

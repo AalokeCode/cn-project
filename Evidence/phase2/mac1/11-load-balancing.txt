@@ -1,0 +1,9 @@
+# Task D / Ext D: X-Backend alternates A/B through edge
+# Krishnas-MacBook-Pro-7.local (10.7.5.108)  2026-11-23 19:06:04
+$ for i in 1 2 3 4 5 6; do curl --cacert ~/cn-project/tls/rootCA.pem -s -o /dev/null -D - https://app.team1.test/api/status | grep -iE '^(HTTP|x-backend|x-edge)' | tr -d '\r' | paste -sd' ' -; done
+HTTP/2 200  x-backend: A x-edge: mac2
+HTTP/2 200  x-backend: B x-edge: mac2
+HTTP/2 200  x-backend: A x-edge: mac2
+HTTP/2 200  x-backend: B x-edge: mac2
+HTTP/2 200  x-backend: A x-edge: mac2
+HTTP/2 200  x-backend: B x-edge: mac2

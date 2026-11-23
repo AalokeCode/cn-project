@@ -1,0 +1,45 @@
+# Task G: DNS query/response (UDP 53, to the team DNS on Mac 4), TCP 3-way handshake + TLS + encrypted data (TCP 443, to the edge). Open the .pcap in Wireshark for the TLS ClientHello/ServerHello.
+# Machine: Mac 1 (primary DNS + client) (Krishnas-MacBook-Pro-7), en0 = 10.7.5.108
+# Time:    2026-11-23 19:16:45 IST
+
+$ tcpdump -nn -r '/Users/krishnadevan/Library/Application Support/Claude/scratch-workspaces/b0f73fbe-a5f1-4f82-874d-8cb03ec2cdc0/91ab49aa-e7e7-4022-abdd-158c9d242cec/scratch-2026-11-23-49e9c5/cn-project/Evidences/phase2/mac1/p1-09-full-request.pcap' 2>/dev/null | head -40
+19:16:41.497311 IP 10.7.22.206.443 > 10.7.5.108.50866: Flags [.], ack 3067259127, win 2048, options [nop,nop,TS val 3247116304 ecr 1136296092], length 0
+19:16:41.497315 IP 10.7.22.206.443 > 10.7.5.108.50866: Flags [.], ack 2, win 2048, options [nop,nop,TS val 3247116304 ecr 1136296092], length 0
+19:16:41.497317 IP 10.7.22.206.443 > 10.7.5.108.50866: Flags [R.], seq 0, ack 2, win 2048, length 0
+19:16:43.346155 IP 10.7.2.47.61999 > 10.7.5.108.53: 5748+ A? telemetry.semgrep.dev. (39)
+19:16:43.359131 IP 10.7.5.108.53 > 10.7.2.47.61999: 5748 3/0/0 A 44.242.80.199, A 184.34.1.48, A 44.226.71.158 (87)
+19:16:43.524960 IP 10.7.5.108.63458 > 10.7.2.47.53: 22482+ [1au] A? app.team1.test. (43)
+19:16:43.607489 IP 10.7.2.47.53 > 10.7.5.108.63458: 22482* 1/0/1 A 10.7.22.206 (59)
+19:16:43.637861 IP 10.7.5.108.50867 > 10.7.22.206.443: Flags [SEW], seq 1618874880, win 65535, options [mss 1460,nop,wscale 6,nop,nop,TS val 4241308523 ecr 0,sackOK,eol], length 0
+19:16:43.650148 IP 10.7.22.206.443 > 10.7.5.108.50867: Flags [S.], seq 2589213994, ack 1618874881, win 65535, options [mss 1460,nop,wscale 6,nop,nop,TS val 99925918 ecr 4241308523,sackOK,eol], length 0
+19:16:43.650382 IP 10.7.5.108.50867 > 10.7.22.206.443: Flags [.], ack 1, win 2059, options [nop,nop,TS val 4241308536 ecr 99925918], length 0
+19:16:43.651628 IP 10.7.5.108.50867 > 10.7.22.206.443: Flags [P.], seq 1:518, ack 1, win 2059, options [nop,nop,TS val 4241308537 ecr 99925918], length 517
+19:16:43.658434 IP 10.7.22.206.443 > 10.7.5.108.50867: Flags [.], ack 1, win 2059, options [nop,nop,TS val 99925928 ecr 4241308536], length 0
+19:16:43.658437 IP 10.7.22.206.443 > 10.7.5.108.50867: Flags [.], ack 518, win 2051, options [nop,nop,TS val 99925930 ecr 4241308537], length 0
+19:16:43.660783 IP 10.7.22.206.443 > 10.7.5.108.50867: Flags [.], seq 1:1449, ack 518, win 2051, options [nop,nop,TS val 99925932 ecr 4241308537], length 1448
+19:16:43.660786 IP 10.7.22.206.443 > 10.7.5.108.50867: Flags [P.], seq 1449:1784, ack 518, win 2051, options [nop,nop,TS val 99925932 ecr 4241308537], length 335
+19:16:43.660984 IP 10.7.5.108.50867 > 10.7.22.206.443: Flags [.], ack 1784, win 2032, options [nop,nop,TS val 4241308546 ecr 99925932], length 0
+19:16:43.662116 IP 10.7.5.108.50867 > 10.7.22.206.443: Flags [P.], seq 518:598, ack 1784, win 2048, options [nop,nop,TS val 4241308548 ecr 99925932], length 80
+19:16:43.662207 IP 10.7.5.108.50867 > 10.7.22.206.443: Flags [P.], seq 598:684, ack 1784, win 2048, options [nop,nop,TS val 4241308548 ecr 99925932], length 86
+19:16:43.662254 IP 10.7.5.108.50867 > 10.7.22.206.443: Flags [P.], seq 684:754, ack 1784, win 2048, options [nop,nop,TS val 4241308548 ecr 99925932], length 70
+19:16:43.667385 IP 10.7.22.206.443 > 10.7.5.108.50867: Flags [.], ack 598, win 2050, options [nop,nop,TS val 99925939 ecr 4241308548], length 0
+19:16:43.671190 IP 10.7.22.206.443 > 10.7.5.108.50867: Flags [P.], seq 1784:2071, ack 598, win 2050, options [nop,nop,TS val 99925939 ecr 4241308548], length 287
+19:16:43.671193 IP 10.7.22.206.443 > 10.7.5.108.50867: Flags [P.], seq 2071:2358, ack 598, win 2050, options [nop,nop,TS val 99925939 ecr 4241308548], length 287
+19:16:43.671194 IP 10.7.22.206.443 > 10.7.5.108.50867: Flags [P.], seq 2358:2420, ack 598, win 2050, options [nop,nop,TS val 99925939 ecr 4241308548], length 62
+19:16:43.671196 IP 10.7.22.206.443 > 10.7.5.108.50867: Flags [.], ack 754, win 2048, options [nop,nop,TS val 99925941 ecr 4241308548], length 0
+19:16:43.671197 IP 10.7.22.206.443 > 10.7.5.108.50867: Flags [P.], seq 2420:2451, ack 754, win 2048, options [nop,nop,TS val 99925942 ecr 4241308548], length 31
+19:16:43.671431 IP 10.7.5.108.50867 > 10.7.22.206.443: Flags [.], ack 2420, win 2039, options [nop,nop,TS val 4241308557 ecr 99925939], length 0
+19:16:43.671625 IP 10.7.5.108.50867 > 10.7.22.206.443: Flags [.], ack 2451, win 2039, options [nop,nop,TS val 4241308557 ecr 99925942], length 0
+19:16:43.671660 IP 10.7.5.108.50867 > 10.7.22.206.443: Flags [P.], seq 754:785, ack 2451, win 2048, options [nop,nop,TS val 4241308557 ecr 99925942], length 31
+19:16:43.679667 IP 10.7.22.206.443 > 10.7.5.108.50867: Flags [.], ack 785, win 2048, options [nop,nop,TS val 99925950 ecr 4241308557], length 0
+19:16:43.687512 IP 10.7.22.206.443 > 10.7.5.108.50867: Flags [P.], seq 2451:2639, ack 785, win 2048, options [nop,nop,TS val 99925959 ecr 4241308557], length 188
+19:16:43.687774 IP 10.7.5.108.50867 > 10.7.22.206.443: Flags [.], ack 2639, win 2046, options [nop,nop,TS val 4241308573 ecr 99925959], length 0
+19:16:43.688085 IP 10.7.5.108.50867 > 10.7.22.206.443: Flags [P.], seq 785:809, ack 2639, win 2048, options [nop,nop,TS val 4241308574 ecr 99925959], length 24
+19:16:43.688153 IP 10.7.5.108.50867 > 10.7.22.206.443: Flags [F.], seq 809, ack 2639, win 2048, options [nop,nop,TS val 4241308574 ecr 99925959], length 0
+19:16:43.698236 IP 10.7.22.206.443 > 10.7.5.108.50867: Flags [.], ack 809, win 2048, options [nop,nop,TS val 99925968 ecr 4241308574], length 0
+19:16:43.698238 IP 10.7.22.206.443 > 10.7.5.108.50867: Flags [.], ack 810, win 2048, options [nop,nop,TS val 99925968 ecr 4241308574], length 0
+19:16:43.698240 IP 10.7.22.206.443 > 10.7.5.108.50867: Flags [R.], seq 2639, ack 810, win 2048, length 0
+19:16:43.791483 IP 10.7.2.47.52775 > 10.7.5.108.53: 44822+ Type65? api.apple-cloudkit.fe2.apple-dns.net. (54)
+19:16:43.791486 IP 10.7.2.47.60830 > 10.7.5.108.53: 3410+ A? api.apple-cloudkit.fe2.apple-dns.net. (54)
+19:16:43.805175 IP 10.7.5.108.53 > 10.7.2.47.52775: 44822 1/0/0 Type65 (76)
+19:16:43.805380 IP 10.7.5.108.53 > 10.7.2.47.60830: 3410 2/0/0 A 17.248.239.65, A 17.248.239.10 (86)

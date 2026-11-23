@@ -1,0 +1,8 @@
+# Right after the cutover: THIS client still hits the old edge (cached DNS answer)
+# Machine: Mac 1 (primary DNS + client) (Krishnas-MacBook-Pro-7), en0 = 10.7.5.108
+# Time:    2026-11-23 19:28:08 IST
+
+$ curl --cacert '/Users/krishnadevan/cn-project/tls/rootCA.pem' -sI https://app.team1.test/api/status | grep -i -E '^(HTTP|x-edge)'; dscacheutil -q host -a name app.team1.test | grep ip_address
+HTTP/2 200 
+x-edge: mac2
+ip_address: 10.7.22.206

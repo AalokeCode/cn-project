@@ -1,0 +1,7 @@
+# Both DNS servers now give the NEW answer
+# Machine: Mac 1 (primary DNS + client) (Krishnas-MacBook-Pro-7), en0 = 10.7.5.108
+# Time:    2026-11-23 19:39:10 IST
+
+$ echo "primary DNS (Mac 1): $(dig @10.7.5.108 app.team1.test +short)"; echo "backup  DNS (Mac 4): $(dig @10.7.2.47 app.team1.test +short)"
+primary DNS (Mac 1): 10.7.17.193
+backup  DNS (Mac 4): 10.7.17.193

@@ -1,9 +1,12 @@
 # Task A: Mac 1 reaches Mac 2, 3, 4
-# Krishnas-MacBook-Pro-7.local (10.7.5.108)  2026-11-23 18:52:25
-$ for ip in 10.7.22.206 10.7.2.47 10.7.17.193; do ping -c 3 $ip | tail -2; done
+# Krishnas-MacBook-Pro-7.local (10.7.5.108)  2026-11-23 19:09:51
+$ for ip in 10.7.22.206 10.7.17.193 10.7.2.47; do echo $ip; ping -c 3 $ip | tail -2; done
+10.7.22.206
 3 packets transmitted, 3 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 14.169/50.164/103.514/38.484 ms
+round-trip min/avg/max/stddev = 10.721/59.446/106.249/39.023 ms
+10.7.17.193
 3 packets transmitted, 3 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 8.342/18.089/35.165/12.115 ms
+round-trip min/avg/max/stddev = 7.144/7.424/7.668/0.215 ms
+10.7.2.47
 3 packets transmitted, 3 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 14.608/18.141/23.747/4.009 ms
+round-trip min/avg/max/stddev = 9.424/24.515/52.898/20.083 ms

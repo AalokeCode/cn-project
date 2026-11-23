@@ -1,0 +1,9 @@
+# Both servers reverted; the client still has the now-outdated cached answer
+# Machine: Mac 1 (primary DNS + client) (Krishnas-MacBook-Pro-7), en0 = 10.7.5.108
+# Time:    2026-11-23 19:42:18 IST
+
+$ echo "primary DNS (Mac 1): $(dig @10.7.5.108 app.team1.test +short)"; echo "backup  DNS (Mac 4): $(dig @10.7.2.47 app.team1.test +short)"; echo "client (dscacheutil): $(dscacheutil -q host -a name app.team1.test | awk '/ip_address/{print $2}')"; echo "client (ping):       $(ping -c 1 -t 1 app.team1.test 2>/dev/null | head -1 | sed 's/.*(\(.*\)).*/\1/')"
+primary DNS (Mac 1): 10.7.22.206
+backup  DNS (Mac 4): 10.7.22.206
+client (dscacheutil): 10.7.22.206
+client (ping):       10.7.22.206

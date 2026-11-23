@@ -1,0 +1,7 @@
+# Task B/D: api.team1.test also served by edge
+# Krishnas-MacBook-Pro-7.local (10.7.5.108)  2026-11-23 19:06:05
+$ curl --cacert ~/cn-project/tls/rootCA.pem -s -i https://api.team1.test/api/status | grep -iE '^(HTTP|x-backend|x-edge)|backend'
+HTTP/2 200 
+x-backend: B
+x-edge: mac2
+{"backend": "B", "status": "ok"}
