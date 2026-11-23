@@ -1,0 +1,12 @@
+# Task E: Mac 4 opens the app by name over HTTPS, cert verified with the team CA (no -k)
+# Machine: Mac 4 (Backend B + backup DNS + client) (MacBook-Pro-M3), en0 = 10.7.2.47
+# Time:    2026-11-23 19:04:10 IST
+
+$ curl --cacert '/Users/hemanth10etii/cn-project/tls/rootCA.pem' -s -i https://app.team1.test/api/status | grep -i -E '^(HTTP|x-backend|cache-control|etag|server)'; echo; curl --cacert '/Users/hemanth10etii/cn-project/tls/rootCA.pem' -s -o /dev/null -w 'TLS verify result: %{ssl_verify_result} (0 = OK), HTTP %{http_version}\n' https://app.team1.test/
+HTTP/2 200 
+server: nginx/1.31.6
+x-backend: B
+etag: "3b7d18aba8a10926"
+cache-control: max-age=60
+
+TLS verify result: 0 (0 = OK), HTTP 2

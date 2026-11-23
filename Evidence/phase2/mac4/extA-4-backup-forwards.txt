@@ -1,0 +1,7 @@
+# Backup DNS still forwards non-project names (clients keep internet)
+# Machine: Mac 4 (Backend B + backup DNS + client) (MacBook-Pro-M3), en0 = 10.7.2.47
+# Time:    2026-11-23 19:04:13 IST
+
+$ dig @10.7.2.47 example.com +short | head -3
+172.66.147.243
+104.20.23.154

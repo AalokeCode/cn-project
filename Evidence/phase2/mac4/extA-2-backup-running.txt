@@ -1,0 +1,22 @@
+# Backup dnsmasq is running on 10.7.2.47:53 and answering
+# Machine: Mac 4 (Backend B + backup DNS + client) (MacBook-Pro-M3), en0 = 10.7.2.47
+# Time:    2026-11-23 19:04:13 IST
+
+$ ps -o pid,user,command -p $(pgrep -x dnsmasq); netstat -an -p udp | grep -E '\.53 '; dig @10.7.2.47 app.team1.test +noall +answer; dig @10.7.2.47 api.team1.test +noall +answer
+  PID USER   COMMAND
+66472 nobody /opt/homebrew/sbin/dnsmasq -C /opt/homebrew/etc/dnsmasq.conf
+udp6       0      0  ::1.53                 *.*                               
+udp6       0      0  fe80::1%lo0.53         *.*                               
+udp6       0      0  fe80::1862:b967:.53    *.*                               
+udp4       0      0  127.0.0.1.53           *.*                               
+udp4       0      0  10.7.2.47.53           *.*                               
+
+; <<>> DiG 9.10.6 <<>> @10.7.2.47 app.team1.test +noall +answer
+; (1 server found)
+;; global options: +cmd
+app.team1.test.		30	IN	A	10.7.22.206
+
+; <<>> DiG 9.10.6 <<>> @10.7.2.47 api.team1.test +noall +answer
+; (1 server found)
+;; global options: +cmd
+api.team1.test.		30	IN	A	10.7.22.206

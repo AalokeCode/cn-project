@@ -7,7 +7,7 @@
 
 source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
 ME="Mac 4 (Backend B + backup DNS + client)"
-EVID_DIR="$REPO/Evidences/phase2/mac4"
+EVID_DIR="$REPO/Evidence/phase2/mac4"
 SECTIONS=(phase1 extA extC extE)
 PORT=3002
 PF_RULES="$PHASE2/pf-isolation-mac4.conf"
