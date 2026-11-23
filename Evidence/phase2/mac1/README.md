@@ -26,6 +26,18 @@ Each item has a `.png` screenshot and a `.txt` with the raw output (host, IP, ti
 
 Team IPs: Mac 2 edge 10.7.22.206 · Mac 3 Backend A 10.7.17.193 · Mac 4 Backend B + backup DNS 10.7.2.47.
 
-## Still pending
-- Mac 3 pf rules ON → retake Ext C for Backend A.
-- `.pcap` (Task G), Ext A failover, Ext B, Ext E: run `./scripts/mac1.sh phase1 / extA / extB / extE` with the team.
+## Script runs (`./scripts/mac1.sh`, 2026-11-23)
+
+| Files | Requirement | Shows |
+|---|---|---|
+| p1-01 … p1-04 | Task A, B | network info, ping, resolvers (10.7.5.108 then 10.7.2.47), `dig` → 10.7.22.206 |
+| p1-05-load-balancing | Task C/D | `X-Backend` alternates A/B by name |
+| p1-06-tls | Task E | certificate verified by the team CA, TLS version, no `-k` |
+| p1-07-curl-I, p1-08-conditional-1/2 | Task F | `Cache-Control`, `ETag`, `304` from the issuing backend |
+| p1-09-full-request (+ `.pcap`) | Task G | DNS UDP 53, TCP handshake, TLS, encrypted data in one capture |
+| extA-1 … extA-7 | Ext A | primary stopped → resolves via backup 10.7.2.47 → app still `HTTP/2 200` → primary back; DNS vs app failure contrast |
+| extB-1 … extB-7 | Ext B | TTL 30; record changed; client keeps cached answer, switches ~43 s later; flush is immediate |
+| extD-1 … extD-3 | Ext D | both up → A down (6/6 via B) → A back, balancing resumes |
+| extE-1 … extE-4 | Ext E | old edge → DNS cut to standby → cached client still mac2 → after TTL mac3 → cut back |
+
+All sections done (Ext C skipped as a team section). Edge (Mac 2) at 10.7.22.206 is up with TLS on :443.
