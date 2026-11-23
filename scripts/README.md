@@ -1,6 +1,6 @@
 # Phase 2 helper scripts
 
-The scripts in `scripts/` do the setup checks, install the configs, run every command below, and save the **real output** (with machine, IP and time) to `Evidences/phase2/mac1` … `mac4`. Mac 1 also saves a `.pcap` you can open in Wireshark.
+The scripts in `scripts/` do the setup checks, install the configs, run every command below, and save the **real output** (with machine, IP and time) to `Evidence/phase2/mac1` … `mac4`. Mac 1 also saves a `.pcap` you can open in Wireshark.
 
 **Before the session (everyone, once):**
 
@@ -25,6 +25,6 @@ The scripts in `scripts/` do the setup checks, install the configs, run every co
 | 6 Ext E | `extE` | | `extE` (starts the standby edge, waits) | `extE` + `dns-point …` when told |
 
 Each cell means `./scripts/macN.sh <cell>`. When a script shows **⏸**, it is waiting for someone else; it says who and what.
-**Afterwards:** each Mac commits its own `Evidences/phase2/macN` folder.
+**Afterwards:** each Mac commits its own `Evidence/phase2/macN` folder.
 
 For Extension F practice, see `scripts/troubleshooting-runbook.md`.

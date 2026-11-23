@@ -26,7 +26,7 @@ dig_a() { dig @"$1" "$DOMAIN" +short +time=2 +tries=1 2>/dev/null | grep -E '^[0
 
 # ---------------------------------------------------------------------------
 # Evidence: run a command, show it live, and save command + output with a
-# header (machine, IP, time) to Evidences/phase2/<mac>/<name>.txt
+# header (machine, IP, time) to Evidence/phase2/<mac>/<name>.txt
 # Usage: evidence <name> "<description>" "<shell command>"
 # ---------------------------------------------------------------------------
 evidence() {
@@ -41,7 +41,7 @@ evidence() {
   } > "$f"
   echo; echo "  ${B}\$ $cmd${N}"
   bash -c "$cmd" 2>&1 | tee -a "$f"
-  echo "  ${G}saved${N} Evidences/phase2/$(basename "$EVID_DIR")/$name.txt"
+  echo "  ${G}saved${N} Evidence/phase2/$(basename "$EVID_DIR")/$name.txt"
 }
 
 countdown() {  # countdown <seconds> <message>
@@ -218,5 +218,5 @@ run_sections() {
   fi
   if [[ $want == phase1 ]]; then preflight; else check_sudo; fi
   "sec_$want"
-  title "Section '$want' done. Evidence saved in Evidences/phase2/$(basename "$EVID_DIR")/"
+  title "Section '$want' done. Evidence saved in Evidence/phase2/$(basename "$EVID_DIR")/"
 }
