@@ -1,0 +1,25 @@
+# Task B: Mac 3 (a client) resolves app.team1.test through the team DNS
+# Machine: Mac 3 (Backend A + standby edge) (Arinas-MacBook-Pro), en0 = 10.7.17.193
+# Time:    2026-11-23 19:06:44 IST
+
+$ dig app.team1.test
+
+; <<>> DiG 9.10.6 <<>> app.team1.test
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 41089
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;app.team1.test.			IN	A
+
+;; ANSWER SECTION:
+app.team1.test.		30	IN	A	10.7.22.206
+
+;; Query time: 18 msec
+;; SERVER: 10.7.5.108#53(10.7.5.108)
+;; WHEN: Mon Nov 23 19:06:44 IST 2026
+;; MSG SIZE  rcvd: 59
+
