@@ -24,6 +24,7 @@ The `.txt` files are written by `scripts/mac4-solo.sh` / `scripts/mac4-extC-solo
 | extC-1-before | Ext C | pf status before (Disabled) |
 | extC-2-rules-on | Ext C | rules loaded: `pass in` only from edge 10.7.22.206 to :3002, `block return` for everyone else |
 | extC-3-edge-allowed | Ext C | with rules ON the edge still reaches Backend B: pass-rule counters and live pf states from 10.7.22.206 |
+| extE-1-fresh-client | Ext E | after the DNS cutover a fresh client (cache flushed) resolves app.team1.test -> 10.7.17.193 and gets `x-edge: mac3`, HTTP/2 200; backup DNS also points at the standby |
 
 Team IPs: Mac 1 DNS 10.7.5.108 · Mac 2 edge 10.7.22.206 · Mac 3 Backend A 10.7.17.193 · **Mac 4 Backend B + backup DNS 10.7.2.47**.
 
@@ -38,4 +39,4 @@ Team IPs: Mac 1 DNS 10.7.5.108 · Mac 2 edge 10.7.22.206 · Mac 3 Backend A 10.7
 - Ext B: `./scripts/mac4.sh dns-point <ip>` when Mac 1 changes the record, so both DNS servers agree.
 - Ext C: Mac 1 / Mac 3 show `curl -m 3 http://10.7.2.47:3002/api/status` is refused while the rules are on.
 - Ext D: Mac 3 stops Backend A → every request through the edge shows `X-Backend: B`.
-- Ext E: `./scripts/mac4.sh extE` when Mac 1 cuts DNS over to the standby edge (Mac 3), then `dns-point 10.7.22.206`.
+- Ext E: done on Mac 4; `dns-point 10.7.22.206` on Mac 1's cue to move back to the main edge.

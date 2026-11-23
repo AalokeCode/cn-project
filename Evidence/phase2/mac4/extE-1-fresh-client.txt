@@ -1,0 +1,8 @@
+# Fresh client (no cached answer) goes straight to the standby edge
+# Machine: Mac 4 (Backend B + backup DNS + client) (MacBook-Pro-M3), en0 = 10.7.2.47
+# Time:    2026-11-23 19:30:11 IST
+
+$ dscacheutil -q host -a name app.team1.test | grep ip_address; curl --cacert '/Users/hemanth10etii/cn-project/tls/rootCA.pem' -sI https://app.team1.test/api/status | grep -i -E '^(HTTP|x-edge)'
+ip_address: 10.7.17.193
+HTTP/2 200 
+x-edge: mac3
