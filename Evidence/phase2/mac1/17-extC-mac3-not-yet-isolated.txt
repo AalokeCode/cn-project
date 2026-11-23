@@ -1,0 +1,5 @@
+# Ext C: Backend A (Mac 3) still directly reachable -> Mac 3 pf rules NOT on at this time
+# Krishnas-MacBook-Pro-7.local (10.7.5.108)  2026-11-23 19:09:33
+$ curl -m 3 -sS -i http://10.7.17.193:3001/api/status | head -1; echo "exit=$?"
+HTTP/1.0 200 OK
+exit=0

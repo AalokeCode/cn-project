@@ -1,0 +1,5 @@
+# Ext A: backup DNS on Mac 4 answers on its own
+# Krishnas-MacBook-Pro-7.local (10.7.5.108)  2026-11-23 19:09:45
+$ dig @10.7.2.47 app.team1.test +noall +answer +stats | grep -E 'IN|SERVER'
+app.team1.test.         30      IN      A       10.7.22.206
+;; SERVER: 10.7.2.47#53(10.7.2.47)

@@ -1,0 +1,5 @@
+# Ext C: client blocked from Backend B directly (Mac 4 pf ON)
+# Krishnas-MacBook-Pro-7.local (10.7.5.108)  2026-11-23 19:09:26
+$ curl -m 3 -sS -i http://10.7.2.47:3002/api/status; echo "exit=$? -> blocked"
+exit=7 -> blocked
+curl: (7) Failed to connect to 10.7.2.47 port 3002 after 1013 ms: Couldn't connect to server
