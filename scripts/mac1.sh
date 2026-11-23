@@ -6,7 +6,7 @@
 
 source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
 ME="Mac 1 (primary DNS + client)"
-EVID_DIR="$REPO/Evidences/phase2/mac1"
+EVID_DIR="$REPO/Evidence/phase2/mac1"
 SECTIONS=(phase1 extA extB extC extD extE)
 CURL="curl --cacert '$CA_FILE'"   # quoted: the CA path may contain spaces
 LOOP6="for i in 1 2 3 4 5 6; do $CURL -s -o /dev/null -D - https://$DOMAIN/api/status | grep -i -E '^(HTTP|x-backend)' | tr -d '\r' | paste -sd' ' -; done"

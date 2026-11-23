@@ -20,4 +20,4 @@ Team CA (public cert only) for the other Macs: [`tls/rootCA.pem`](../../../tls/r
 - `extC` — after Mac 3 and Mac 4 turn their pf rules on: edge can still reach both backends.
 - `extD` — right after Mac 1's `extD`: nginx error/access log lines for the Backend A failover.
 
-The scripts write to `Evidences/phase2/mac2/`; move the new `.txt` files here and rerun `evidence-to-png.sh`.
+The scripts now write straight here; after each section rerun `./scripts/evidence-to-png.sh Evidence/phase2/mac2`.

@@ -5,7 +5,7 @@
 
 source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
 ME="Mac 2 (edge nginx)"
-EVID_DIR="$REPO/Evidences/phase2/mac2"
+EVID_DIR="$REPO/Evidence/phase2/mac2"
 SECTIONS=(phase1 extC extD)
 
 # On Mac 2 the CA lives in mkcert's own folder
