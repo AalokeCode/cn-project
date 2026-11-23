@@ -1,18 +1,12 @@
 # Task F: response headers (Cache-Control max-age=60, ETag)
-# Krishnas-MacBook-Pro-7.local (10.7.5.108)  2026-11-23 19:06:04
-$ curl --cacert ~/cn-project/tls/rootCA.pem -I https://app.team1.test/api/status
+# Krishnas-MacBook-Pro-7.local (10.7.5.108)  2026-11-23 19:11:29
+$ curl -sS --cacert ~/cn-project/tls/rootCA.pem -I https://app.team1.test/api/status
 HTTP/2 200 
 server: nginx/1.31.6
-date: Mon, 23 Nov 2026 13:36:04 GMT
+date: Mon, 23 Nov 2026 13:41:29 GMT
 content-type: application/json
 content-length: 32
 x-backend: A
 etag: "d208bfa2f0ed4859"
 cache-control: max-age=60
 x-edge: mac2
-
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-  0    32    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
