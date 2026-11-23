@@ -1,0 +1,6 @@
+# nginx detected Backend A down and moved to the next upstream (requests from Mac 1, today)
+# Machine: Mac 2 (edge nginx) (Aalokes-MacBook-Pro), en0 = 10.7.22.206
+# Time:    2026-11-23 19:28:11 IST
+
+$ grep -E 'connect\(\) failed|upstream|no live' /opt/homebrew/var/log/nginx/error.log | grep '^2026/11/23' | grep 'client: 10.7.5.108,' | tail -8
+2026/11/23 19:23:26 [error] 62723#0: *253 kevent() reported that connect() failed (61: Connection refused) while connecting to upstream, client: 10.7.5.108, server: app.team1.test, request: "GET /api/status HTTP/2.0", upstream: "http://10.7.17.193:3001/api/status", host: "app.team1.test"

@@ -1,0 +1,10 @@
+# The same requests still got HTTP 200 for Mac 1 (nginx retried them on Backend B)
+# Machine: Mac 2 (edge nginx) (Aalokes-MacBook-Pro), en0 = 10.7.22.206
+# Time:    2026-11-23 19:28:12 IST
+
+$ grep -E '^10.7.5.108 .*\[23/Nov/2026:(19:23:26) ' /opt/homebrew/var/log/nginx/access.log
+10.7.5.108 - - [23/Nov/2026:19:23:26 +0530] "GET /api/status HTTP/2.0" 200 32 "-" "curl/8.7.1"
+10.7.5.108 - - [23/Nov/2026:19:23:26 +0530] "GET /api/status HTTP/2.0" 200 32 "-" "curl/8.7.1"
+10.7.5.108 - - [23/Nov/2026:19:23:26 +0530] "GET /api/status HTTP/2.0" 200 32 "-" "curl/8.7.1"
+10.7.5.108 - - [23/Nov/2026:19:23:26 +0530] "GET /api/status HTTP/2.0" 200 32 "-" "curl/8.7.1"
+10.7.5.108 - - [23/Nov/2026:19:23:26 +0530] "GET /api/status HTTP/2.0" 200 32 "-" "curl/8.7.1"

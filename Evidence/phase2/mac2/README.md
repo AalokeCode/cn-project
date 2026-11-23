@@ -13,11 +13,13 @@ Each item has a `.txt` with the real command output (machine, IP, timestamp, com
 | p1-06-cert | Task E | mkcert certificate: SAN `app.team1.test`, `api.team1.test`, issued by the team CA |
 | p1-07-http2 | HTTP/2 | `HTTP/2 200` through the edge, verified with `--cacert` (no `-k`) |
 | p1-08-load-balancing | Task D | 6 requests alternate `X-Backend: A` / `B`, all `X-Edge: mac2` |
+| extD-1-error-log | Ext D | nginx error.log: `connect() failed (61: Connection refused)` to Backend A 10.7.17.193:3001 for Mac 1's request at 19:23:26 |
+| extD-2-access-log | Ext D | Same second in access.log: Mac 1 still got `200` (nginx retried on Backend B) |
 | extC-1-edge-allowed | Ext C | With pf on at Mac 3 and Mac 4, the edge still gets `200` from Backend A :3001 and Backend B :3002 |
 
 Team CA (public cert only) for the other Macs: [`tls/rootCA.pem`](../../../tls/rootCA.pem) → copy to `~/cn-project/tls/rootCA.pem`.
 
 ## Still pending (run with the team, per `scripts/README.md`)
-- `extD` — right after Mac 1's `extD`: nginx error/access log lines for the Backend A failover.
+- nothing: Mac 2's sections are complete.
 
 The scripts now write straight here; after each section rerun `./scripts/evidence-to-png.sh Evidence/phase2/mac2`.
