@@ -16,18 +16,18 @@ Domain: `app.team1.test` / `api.team1.test` → 10.7.22.206. Entry point: `https
 
 | Deliverable | Where |
 |---|---|
-| Architecture document | Phase 1: [topology](Architecture/topology.md), [IP table](Architecture/ip-table.txt), [request flow](Architecture/request-flow.md). Phase 2 update: [Architecture/phase2.md](Architecture/phase2.md) |
+| Architecture document | Phase 1: [topology](Architecture/topology.md), [IP table](Architecture/ip-table.txt), [request flow](Architecture/request-flow.md). Phase 2: [Architecture/phase2.md](Architecture/phase2.md), diagrams [topology-phase2.png](Architecture/topology-phase2.png), [request-flow-phase2.png](Architecture/request-flow-phase2.png) (sources in [Architecture/src/](Architecture/src/)) |
 | Configuration bundle | Phase 1: [Configuration/](Configuration/) (`dnsmasq.conf`, `nginx.conf`, `TLS-notes.txt`, `backend-launch-instructions.md`). Phase 2: [Configuration/phase2/](Configuration/phase2/) (`nginx-phase2.conf`, `dnsmasq-primary.conf`, `dnsmasq-backup.conf`, `pf-isolation-mac3.conf`, `pf-isolation-mac4.conf`) |
 | Backend source code | [Backends/](Backends/) (Phase 2 code: ETag, 304, HEAD). Helper scripts: [scripts/](scripts/README.md) |
 | Evidence folder | Phase 1: [Evidence/](Evidence/README.md). Phase 2: [Evidence/phase2/](Evidence/phase2/) — per Mac: [mac1](Evidence/phase2/mac1/README.md), [mac2](Evidence/phase2/mac2/README.md), [mac3](Evidence/phase2/mac3/README.md), [mac4](Evidence/phase2/mac4/README.md) |
-| Phase 2 final report | [Reports/Phase2-Final-Report.md](Reports/Phase2-Final-Report.md) |
+| Phase 2 final report | **[Reports/Phase2-Final-Report.pdf](Reports/Phase2-Final-Report.pdf)** (architecture + report + evidence highlights, 16 pages). Source: [Phase2-Final-Report.md](Reports/Phase2-Final-Report.md), built by [build_pdf.py](Reports/build_pdf.py) |
 | Ext F practice | [scripts/troubleshooting-runbook.md](scripts/troubleshooting-runbook.md) |
 
 ## 2. Final demonstration sequence (Section 8) → evidence
 
 | # | Step | Evidence |
 |---|---|---|
-| 1 | Topology and IP/service inventory | [Architecture/phase2.md](Architecture/phase2.md), [topology-diagram.png](Architecture/topology-diagram.png) |
+| 1 | Topology and IP/service inventory | [Architecture/phase2.md](Architecture/phase2.md), [topology-phase2.png](Architecture/topology-phase2.png), [request-flow-phase2.png](Architecture/request-flow-phase2.png) |
 | 2 | All machines on the private LAN | `p1-01-network-info` + `p1-02-ping` on every Mac: [mac1](Evidence/phase2/mac1/p1-02-ping.png), [mac2](Evidence/phase2/mac2/p1-02-ping.png), [mac3](Evidence/phase2/mac3/p1-02-ping.png), [mac4](Evidence/phase2/mac4/p1-02-ping.png) |
 | 3 | Resolve the domain from a client | [mac1/p1-04-dig](Evidence/phase2/mac1/p1-04-dig.png), [mac3/p1-04-dig](Evidence/phase2/mac3/p1-04-dig.png), [mac4/p1-04-dig](Evidence/phase2/mac4/p1-04-dig.png) |
 | 4 | HTTPS by name, no certificate warning, no `-k` | [mac1/p1-06-tls](Evidence/phase2/mac1/p1-06-tls.png), [mac4/p1-05-https-by-name](Evidence/phase2/mac4/p1-05-https-by-name.png), [mac2/p1-06-cert](Evidence/phase2/mac2/p1-06-cert.png), [mac2/p1-07-http2](Evidence/phase2/mac2/p1-07-http2.png) |

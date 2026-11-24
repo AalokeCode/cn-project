@@ -2,6 +2,8 @@
 
 Same LAN as Phase 1 (10.7.0.0/19, mask 255.255.224.0, gateway 10.7.0.1). IPs changed through DHCP; the single source of truth is [`scripts/team.env`](../scripts/team.env).
 
+Diagrams: [topology-phase2.png](topology-phase2.png) · [request-flow-phase2.png](request-flow-phase2.png) (SVG sources in [src/](src/)).
+
 ## IP / service table
 
 | Mac | Owner | Services | IP | Ports | Cloud equivalent |

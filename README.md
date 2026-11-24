@@ -1,6 +1,6 @@
 # CN Project — Private Network Service Platform (Team 1)
 
-**Start here for grading: [SUBMISSION.md](SUBMISSION.md)** — every deliverable and every piece of evidence, mapped to the demo steps and extensions. Phase 2 report: [Reports/Phase2-Final-Report.md](Reports/Phase2-Final-Report.md).
+**Start here for grading: [SUBMISSION.md](SUBMISSION.md)** — every deliverable and every piece of evidence, mapped to the demo steps and extensions. Phase 2 report (PDF): [Reports/Phase2-Final-Report.pdf](Reports/Phase2-Final-Report.pdf).
 
 The Phase 1 notes below are kept as they were; Phase 2 is at the end.
 
@@ -77,7 +77,7 @@ Full status of what's captured and what's not: [`Evidence/README.md`](Evidence/R
 | Backend source code | Done. Phase 1 zip at [`_submission/Backend-Source-Code.zip`](_submission/Backend-Source-Code.zip); current (Phase 2) code in [`Backends/`](Backends/) |
 | Evidence folder | Phase 1 done except the TCP/TLS Wireshark capture (see `Evidence/README.md`). Phase 2 done in [`Evidence/phase2/`](Evidence/phase2/), incl. a full-request `.pcap` |
 | Phase 1 checkpoint (live system) | Rebuilt and re-verified on 2026-11-23 (Phase 2 retakes) |
-| Phase 2 final report | Done: [`Reports/Phase2-Final-Report.md`](Reports/Phase2-Final-Report.md) |
+| Phase 2 final report | Done: [`Reports/Phase2-Final-Report.pdf`](Reports/Phase2-Final-Report.pdf) (source [`.md`](Reports/Phase2-Final-Report.md)) |
 | Final presentation | Live demo following [SUBMISSION.md](SUBMISSION.md) Section 2; Ext F is live |
 
 ## Phase 2 (Team 1)
@@ -98,5 +98,5 @@ Entry point: `https://app.team1.test/api/status` (port 443, HTTP/2).
 - Scripts + run sheet: [`scripts/README.md`](scripts/README.md); Ext F practice: [`scripts/troubleshooting-runbook.md`](scripts/troubleshooting-runbook.md)
 - Team CA (public cert only): [`tls/rootCA.pem`](tls/rootCA.pem). Never commit `*-key.pem`.
 - Evidence: [`mac1`](Evidence/phase2/mac1/README.md) (DNS + client), [`mac2`](Evidence/phase2/mac2/README.md) (edge), [`mac3`](Evidence/phase2/mac3/README.md) (Backend A + standby edge), [`mac4`](Evidence/phase2/mac4/README.md) (Backend B + backup DNS)
-- Architecture: [`Architecture/phase2.md`](Architecture/phase2.md) · Report: [`Reports/Phase2-Final-Report.md`](Reports/Phase2-Final-Report.md)
+- Architecture: [`Architecture/phase2.md`](Architecture/phase2.md), [`topology-phase2.png`](Architecture/topology-phase2.png), [`request-flow-phase2.png`](Architecture/request-flow-phase2.png) · Report: [`Reports/Phase2-Final-Report.pdf`](Reports/Phase2-Final-Report.pdf)
 - Coordination during the run: LAN message board [`scripts/coord-server.py`](scripts/coord-server.py) + [`scripts/coord.sh`](scripts/coord.sh)

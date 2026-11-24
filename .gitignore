@@ -3,3 +3,4 @@
 .venv/
 *-key.pem
 coord/
+Reports/build/

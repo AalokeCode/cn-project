@@ -1,0 +1,114 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Phase 2 Request Flow</title>
+<style>
+  body { margin: 0; background: #ffffff; font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; }
+  svg text { font-family: inherit; }
+</style></head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1040" viewBox="0 0 1400 1040">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#334155"/>
+    </marker>
+    <marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b91c1c"/>
+    </marker>
+  </defs>
+  <text x="40" y="50" font-size="30" font-weight="700" fill="#0f172a">Phase 2 Request Flow — GET https://app.team1.test/api/status</text>
+  <text x="40" y="80" font-size="16" fill="#475569">One request from a client, layer by layer, with the Ext D failover path (Backend A down)</text>
+
+  <!-- lifeline heads -->
+  <g font-size="17" font-weight="700" text-anchor="middle">
+    <rect x="60" y="105" width="210" height="62" rx="10" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
+    <text x="165" y="132" fill="#312e81">Client</text>
+    <text x="165" y="154" font-size="13" font-weight="400" fill="#3730a3">Mac 1 / Mac 4</text>
+
+    <rect x="330" y="105" width="210" height="62" rx="10" fill="#ecfeff" stroke="#0891b2" stroke-width="2"/>
+    <text x="435" y="132" fill="#164e63">DNS</text>
+    <text x="435" y="154" font-size="13" font-weight="400" fill="#155e75">10.7.5.108 (backup 10.7.2.47)</text>
+
+    <rect x="620" y="105" width="230" height="62" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <text x="735" y="132" fill="#78350f">Edge nginx</text>
+    <text x="735" y="154" font-size="13" font-weight="400" fill="#92400e">Mac 2 · 10.7.22.206:443</text>
+
+    <rect x="930" y="105" width="200" height="62" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+    <text x="1030" y="132" fill="#064e3b">Backend A</text>
+    <text x="1030" y="154" font-size="13" font-weight="400" fill="#065f46">10.7.17.193:3001</text>
+
+    <rect x="1170" y="105" width="200" height="62" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+    <text x="1270" y="132" fill="#064e3b">Backend B</text>
+    <text x="1270" y="154" font-size="13" font-weight="400" fill="#065f46">10.7.2.47:3002</text>
+  </g>
+  <g stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 6">
+    <line x1="165" y1="167" x2="165" y2="1010"/>
+    <line x1="435" y1="167" x2="435" y2="1010"/>
+    <line x1="735" y1="167" x2="735" y2="1010"/>
+    <line x1="1030" y1="167" x2="1030" y2="1010"/>
+    <line x1="1270" y1="167" x2="1270" y2="1010"/>
+  </g>
+
+  <!-- layer bands -->
+  <g font-size="13" font-weight="700" fill="#64748b">
+    <text x="12" y="208">DNS</text>
+    <text x="12" y="318">TCP</text>
+    <text x="12" y="446">TLS</text>
+    <text x="12" y="610">HTTP/2</text>
+    <text x="12" y="700">LB</text>
+    <text x="12" y="838">Ext D</text>
+  </g>
+
+  <g font-size="14" fill="#0f172a">
+    <!-- DNS -->
+    <line x1="165" y1="205" x2="431" y2="205" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <text x="180" y="196">A? app.team1.test (UDP 53)</text>
+    <line x1="435" y1="250" x2="169" y2="250" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <text x="180" y="241">A 10.7.22.206 · TTL 30 (cached by the OS)</text>
+
+    <!-- TCP -->
+    <line x1="165" y1="295" x2="731" y2="295" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <text x="300" y="287">SYN  → 10.7.22.206:443</text>
+    <line x1="735" y1="325" x2="169" y2="325" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <text x="300" y="317">SYN-ACK</text>
+    <line x1="165" y1="355" x2="731" y2="355" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <text x="300" y="347">ACK  (3-way handshake done)</text>
+
+    <!-- TLS -->
+    <line x1="165" y1="400" x2="731" y2="400" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <text x="230" y="392">ClientHello · SNI app.team1.test · ALPN h2</text>
+    <line x1="735" y1="440" x2="169" y2="440" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <text x="230" y="432">ServerHello · Certificate (SAN app/api.team1.test, team mkcert CA)</text>
+    <line x1="165" y1="480" x2="731" y2="480" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <text x="230" y="472">Key exchange · Finished — client verifies with --cacert rootCA.pem</text>
+    <rect x="175" y="497" width="550" height="34" rx="6" fill="#f1f5f9"/>
+    <text x="190" y="519" font-size="13" fill="#334155">From here every byte between client and edge is encrypted (TLS 1.3)</text>
+
+    <!-- HTTP -->
+    <line x1="165" y1="580" x2="731" y2="580" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <text x="230" y="572">GET /api/status (HTTP/2, inside TLS)</text>
+
+    <!-- LB to A -->
+    <line x1="735" y1="625" x2="1026" y2="625" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <text x="750" y="617">plain HTTP, round-robin pick</text>
+    <line x1="1030" y1="660" x2="739" y2="660" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <text x="750" y="652">200 · X-Backend: A · ETag</text>
+    <line x1="735" y1="700" x2="169" y2="700" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <text x="230" y="692">HTTP/2 200 · x-backend: A · Cache-Control: max-age=60 · x-edge: mac2</text>
+    <text x="230" y="728" font-size="13" fill="#475569">Next request goes to B. Repeat with If-None-Match → 304 Not Modified from the backend that issued the ETag.</text>
+
+    <!-- Ext D -->
+    <rect x="600" y="760" width="780" height="235" rx="12" fill="#fef2f2" stroke="#fecaca"/>
+    <text x="620" y="785" font-size="15" font-weight="700" fill="#991b1b">Ext D — Backend A stopped</text>
+    <line x1="165" y1="810" x2="731" y2="810" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <text x="230" y="802">GET /api/status</text>
+    <line x1="735" y1="840" x2="1026" y2="840" stroke="#b91c1c" stroke-width="2.5" marker-end="url(#r)"/>
+    <text x="750" y="832" fill="#b91c1c">connect() → refused (61)</text>
+    <text x="750" y="866" font-size="13" fill="#991b1b">A marked down for fail_timeout 10 s</text>
+    <line x1="735" y1="890" x2="1266" y2="890" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <text x="1045" y="882">proxy_next_upstream → B</text>
+    <line x1="1270" y1="925" x2="739" y2="925" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <text x="1045" y="917">200 · X-Backend: B</text>
+    <line x1="735" y1="965" x2="169" y2="965" stroke="#334155" stroke-width="2.5" marker-end="url(#a)"/>
+    <text x="230" y="957">HTTP/2 200 · x-backend: B — client never sees the failure</text>
+  </g>
+</svg>
+</body></html>
